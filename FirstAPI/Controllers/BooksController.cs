@@ -4,11 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FirstAPI.Controllers
 {
-    /// <summary>
-    /// API controller for handling book-related operations
-    /// </summary>
-    [ApiController]
-    public class BookController : Controller
+   [ApiController]
+    public class BooksController : Controller
     {
         /// <summary>
         /// Repository for accessing book data
@@ -19,7 +16,7 @@ namespace FirstAPI.Controllers
         /// Initializes a new instance of the BookController class
         /// </summary>
         /// <param name="bookRepository">The book repository for data operations</param>
-        public BookController(IBookRepository bookRepository)
+        public BooksController(IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
         }
@@ -38,6 +35,23 @@ namespace FirstAPI.Controllers
             }
             return Ok(book);
         }
+
+        /// <summary>
+        /// Gets a book by its unique identifier
+        /// </summary>
+        /// <param name="id">The ID of the book to retrieve</param>
+        /// <returns>The book if found, or NotFound if no book exists with the specified ID</returns>
+        [HttpGet("api/books/{id}")]
+        public async Task<IActionResult> GetBookByIdAsync(int id)
+        {
+            var book = await _bookRepository.GetBookByIdAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }
+
 
         /// <summary>
         /// Adds a new book to the database

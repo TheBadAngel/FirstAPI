@@ -32,5 +32,6 @@ namespace FirstAPI.Models
         /// </summary>
         [Required]
         public int Year { get; set; }
+        public ICollection<BookReview> Reviews { get; set; }
     }
 }

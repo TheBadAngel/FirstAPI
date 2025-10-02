@@ -3,9 +3,6 @@ using System.Threading.Tasks;
 
 namespace FirstAPI.Persistence
 {
-    /// <summary>
-    /// Interface defining the contract for book repository operations
-    /// </summary>
     public interface IBookRepository
     {
         /// <summary>
